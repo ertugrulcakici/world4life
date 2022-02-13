@@ -1,7 +1,7 @@
 # world4life
 
 
-**A Flutter Project for ui.**
+**world4life Project of Self Favour Team**
 
 
 **Splash Screen**
