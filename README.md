@@ -1,4 +1,4 @@
-# world4life
+# WORLD4LIFE
 
 
 **world4life Project of Self Favour Team**
