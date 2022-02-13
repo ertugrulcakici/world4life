@@ -39,7 +39,6 @@ databaseHelper = DatabaseHelper()
 
 @app.route("/images/<image_path>", methods=['GET'])
 def image(image_path):
-    print(image_path)
     return Response(open("images/"+image_path, 'rb').read(), mimetype="image/jpeg")
 
 @app.route("/login", methods=['POST'])
@@ -100,10 +99,8 @@ def register():
             id = databaseHelper.executeRaw("SELECT ID FROM users WHERE username = ?",(username,)).firstRow(index=0)
             return Response(json.dumps({"ID":id,"username":username,"password":password,"mail":mail,"token":token}),mimetype="application/json",status=200)
         else:
-            print("hata 1")
             return Response(json.dumps({"message":ResponseTypes.USER_NOT_CREATED.value[0],"type":ResponseTypes.USER_NOT_CREATED.name,"debug_description":"Bilinmeyen sebep:"+response.message}),mimetype="application/json",status=201)
     else:
-        print("hata 2")
         return Response(json.dumps({"message":ResponseTypes.USER_EXISTS.value[0],"type":ResponseTypes.USER_EXISTS.name}),status=201,mimetype="application/json")
 
 @app.route("/news")
@@ -139,23 +136,18 @@ def categories():
 
 @app.route("/getpost/<string:area>/<string:subarea>/<int:category>")
 def getpost(area,subarea,category):
-    print(area,subarea,category)
     basesql = "SELECT w.ID, w.title, w.lang, w.long, w.description, w.img_name, w.isPicked, w.created_date, u.username, w.area, w.subarea, c.description, c.img_name,c.ID category_id, w.created_by, c.img_name  FROM waste_post as w inner join categories as c on w.category_id = c.ID inner join users as u on w.created_by = u.ID  "
     if category == 0:
         sql = basesql+' WHERE w.area like "%?%" and w.subarea like "%?%"'.replace("?",area.replace("*","",1)).replace("?",subarea.replace("*","",1))
     else:    
         sql = basesql+' WHERE w.area like "%?%" and w.subarea like "%?%" category_id = '.replace("?",area.replace("*","",1)).replace("?",subarea.replace("*","",1))+str(category)
     response = databaseHelper.executeRaw(sql)
-    print(sql)
     if response.status == "OK":
         posts = []
         for data in response.data:
             posts.append({"ID":data[0],"title":data[1],"lang":data[2],"long":data[3],"description":data[4],"img_name":data[5],"isPicked":data[6],"created_date":data[7],"username":data[8],"area":data[9],"subarea":data[10],"category_description":data[11],"category_img_name":data[12],"category_id":data[13],"created_by":data[14]})
         data = {"posts":posts}
-        print(len(data["posts"]))
         return Response(json.dumps(data),status=200, mimetype="application/json")
-    else:
-        print(response.message)
 
     return Response(json.dumps({"message":"getpost"}),status=200,mimetype="application/json")
 
