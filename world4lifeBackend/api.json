@@ -1,0 +1,103 @@
+{
+    "login": {
+        "type":["post"],
+        "url":"/login",
+        "data":{
+            "username": "string",
+            "password": "string"
+        },
+        "return":{
+            "ID": "int",
+            "username":"string",
+            "password":"string",
+            "mail":"string",
+            "token": "string"
+        }
+    },
+    "register":
+    {
+        "type":["post"],
+        "url":"/register",
+        "data":{
+            "username": "string",
+            "password": "string",
+            "email": "string"
+        },
+        "return":{
+            "ID": "int",
+            "username":"string",
+            "password":"string",
+            "mail":"string",
+            "token": "string"
+        }
+    },
+    "current user":
+    {
+        "type":["get"],
+        "url":"/user/<token>",
+        "return":{
+            "ID": "int",
+            "username":"string",
+            "password":"string",
+            "mail":"string",
+            "token": "string"
+        }
+    },
+    "news":
+    {
+        "type":["get"],
+        "url":"/news",
+        "return":{"news":{
+            "ID": "int",
+            "title":"string",
+            "description":"string",
+            "img_name":"string",
+            "created_date":"string",
+            "content":"string"
+        }}
+    },
+    "banners":
+    {
+        "type":["get"],
+        "url":"/banners",
+        "return":{"banners":{
+            "ID": "int",
+            "img_name":"string",
+            "url":"string"
+        }}
+    },
+    "add post":
+    {
+        "type":["post"],
+        "url":"/addpost",
+        "data":{
+            "title": "string",
+            "lang":"real",
+            "long":"real",
+            "description":"string",
+            "category_id":"int",
+            "isPicked":"int",
+            "created_date":"int",
+            "created_by":"int",
+            "area":"string",
+            "subarea":"string"
+        },
+        "file": {
+            "file":"bytes"
+        },
+        "return":{
+            "ID":"int",
+            "title": "string",
+            "lang":"real",
+            "long":"real",
+            "description":"string",
+            "img_name":"string",
+            "category_id":"int",
+            "isPicked":"int",
+            "created_date":"int",
+            "created_by":"int",
+            "area":"string",
+            "subarea":"string"
+        }
+    }
+}

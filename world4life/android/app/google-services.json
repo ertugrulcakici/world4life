@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "646099743447",
+    "project_id": "world4life-5f601",
+    "storage_bucket": "world4life-5f601.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646099743447:android:88551ce3d927e7cecd7692",
+        "android_client_info": {
+          "package_name": "com.example.world4life"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646099743447-mbgcomas8nfha521o7nldpf6knt168qs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOivO4agmAScfGCvBJ-Fq6vLbMVpGlI_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "646099743447-mbgcomas8nfha521o7nldpf6knt168qs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
