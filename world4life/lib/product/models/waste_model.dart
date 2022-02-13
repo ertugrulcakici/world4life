@@ -1,10 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:world4life/core/init/api_data.dart';
 import "package:animated_card/animated_card.dart";
 import 'package:world4life/core/init/locator.dart';
+import 'package:world4life/core/init/theme/theme_management.dart';
 import 'package:world4life/product/enums/image_types.dart';
 import 'package:world4life/product/widget/image/custom_image.dart';
 
@@ -66,12 +69,56 @@ class WasteModel {
   AnimatedCard toWidget(BuildContext context) => AnimatedCard(
         child: Card(
           child: ListTile(
-            leading: CustomImage.show(
-                  ImageType.Network, locator<ApiData>().getImageUrl + category_img_name ,width: 14.w),
+            leading: CustomImage.show(ImageType.Network,
+                locator<ApiData>().getImageUrl + category_img_name,
+                width: 14.w),
             title: Text(title),
             visualDensity: VisualDensity.adaptivePlatformDensity,
-            subtitle: Text(description),
-            onTap: () {},
+            subtitle: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("\t" + description),
+                const Divider(thickness: 1),
+                Text("Konum: " + area + "/" + subarea),
+                Text("Tarih: " +
+                    DateTime.fromMillisecondsSinceEpoch(created_date)
+                        .toString()),
+              ],
+            ),
+            contentPadding: EdgeInsets.all(10.sp),
+            trailing: const Icon(Icons.keyboard_arrow_right),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Scaffold(
+                  appBar: AppBar(
+                    title: const Text("Atık Detay"),
+                  ),
+                  body: Padding(
+                    padding: EdgeInsets.all(15.sp),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomImage.show(ImageType.Network,
+                            locator<ApiData>().getImageUrl + img_name,
+                            width: MediaQuery.of(context).size.width),
+                        Text(
+                          title,
+                          style: themeData.textTheme.titleMedium,
+                        ),
+                        Text("Açıklama:" + description),
+                        Text("Konum: " + area + "/" + subarea),
+                        Text("Tarih: " +
+                            DateTime.fromMillisecondsSinceEpoch(created_date)
+                                .toString()),
+                        Text("Toplandımı: Hayır"),
+                        Text("Ekleyen kişi:" + username)
+                      ],
+                    ),
+                  ),
+                );
+              }));
+            },
           ),
         ),
       );
